@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>ws demo</title>
+    <meta charset="utf8">
+    <style>
+    	ul>li{
+    		line-height: 1.5;
+    		font-size:15px;
+    		color:royalblue;
+    		list-style: none;
+    	}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <ul id="list">
+    	
+    </ul>
+</body>
+
+<script>
+	var box=document.getElementById('box');
+	var list=document.getElementById('list');
+  var ws = new WebSocket('ws://localhost:8080');
+  ws.onopen = function () {
+    box.innerHTML='client: ws connection is open';
+    ws.send('hello');
+  };
+  ws.onmessage = function (e) {
+  	var newli=document.createElement('li');
+  	newli.innerHTML=e.data;
+    list.appendChild(newli);
+  };
+</script>
+
+</html>
